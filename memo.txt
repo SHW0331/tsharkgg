@@ -1,0 +1,191 @@
+# Wireshark Project
+- 실시간으로 Wireshark로 캡쳐한 패킷을 Python으로 가져옴
+- 모니터링 대시보드 웹 사이트 및 
+
+# 실시간 네트워크 트래픽 필터링 시스템
+목적: 실시간으로 네트워크 트래픽을 모니터링하고 특정 조건에 맞는 데이터를 필터링.
+
+주요 기능:
+
+특정 IP, 포트, 프로토콜 기반 실시간 필터링.
+결과 데이터를 파일로 저장(Pcap 또는 JSON).
+탐지된 트래픽을 실시간 대시보드로 표시.
+기술 스택:
+
+Python: Pyshark로 실시간 캡처.
+React.js: 대시보드 UI 구현.
+
+# Wireshark 캡처 자동화 및 보고서 생성 도구
+목적: Wireshark를 자동화해 트래픽을 캡처하고, 정기적으로 보고서를 생성.
+
+주요 기능:
+
+스케줄 기반 Wireshark 캡처 자동 실행.
+Pcap 파일에서 주요 통계를 추출해 PDF 보고서 생성.
+탐지된 주요 이상 트래픽(예: 대규모 데이터 전송, 비정상적인 포트 사용) 표시.
+기술 스택:
+
+Python: Wireshark 명령어(tshark)를 사용해 자동화.
+ReportLab: PDF 보고서 생성.
+Linux 크론(cron): 정기 실행
+
+# 머신러닝 기반 네트워크 트래픽 분류기
+목적: 머신러닝을 사용해 네트워크 트래픽을 정상/비정상 또는 서비스별로 분류.
+
+주요 기능:
+
+Wireshark 데이터를 기반으로 트래픽 데이터를 학습 데이터셋으로 가공.
+머신러닝 모델로 DoS/DDoS, Port Scanning 등의 공격 탐지.
+실시간 트래픽 분석 및 경고 기능.
+기술 스택:
+
+Python: Scikit-learn 또는 TensorFlow로 모델 학습.
+Pyshark: 데이터 전처리.
+Flask/Streamlit: 결과 시각화 및 실시간 경고.
+
+---------------------------------------------------------------
+
+프로젝트 계획서
+1. 프로젝트 개요
+프로젝트 이름: 실시간 네트워크 트래픽 모니터링 및 보고서 생성 시스템
+목표:
+Wireshark의 CLI 도구인 tshark를 사용해 실시간으로 네트워크 패킷을 캡처.
+Python으로 패킷 데이터를 가공 및 필터링하여 실시간 대시보드로 시각화.
+네트워크 트래픽을 정기적으로 캡처하고, 보고서를 생성하여 이상 트래픽의 통계를 PDF로 제공.
+특정 조건에 맞는 이상 트래픽 탐지 및 사용자 알림 전송.
+2. 주요 기능
+1) 실시간 데이터 모니터링 및 필터링
+Wireshark의 tshark를 통해 실시간 네트워크 패킷 캡처.
+사용자 정의 조건(예: 특정 IP, 포트, 프로토콜)에 따른 실시간 필터링.
+캡처된 데이터를 대시보드에 실시간으로 시각화.
+2) 자동화된 트래픽 캡처 및 보고서 생성
+정기적으로 네트워크 트래픽을 캡처하고 PCAP 파일로 저장.
+Python으로 PCAP 데이터를 분석하여 주요 통계(예: 대역폭 사용량, 비정상 트래픽)를 추출.
+PDF 형식의 보고서 생성 및 사용자에게 전달.
+정기 실행(예: 하루 1회)을 위해 Linux 크론(cron) 사용.
+3) 사용자 알림 시스템
+이상 트래픽(예: 비정상 포트 사용, 특정 IP에서의 대량 요청) 탐지 시 알림 전송.
+이메일 또는 Slack 채널로 경고 메시지 전달.
+3. 기술 스택
+데이터 캡처: tshark
+
+Wireshark CLI 도구로 실시간 패킷 캡처 및 저장.
+정기 캡처 스케줄링을 위해 Linux 크론(cron)과 통합.
+데이터 처리 및 분석: Python
+
+주요 라이브러리:
+subprocess: tshark 명령 실행 및 데이터 가져오기.
+pandas: 데이터 가공 및 통계 처리.
+scapy: 패킷 분석.
+PDF 보고서 생성: ReportLab
+
+PCAP 데이터 분석 결과를 PDF 보고서로 자동 생성.
+대시보드 구현:
+
+Flask/Dash/Streamlit: 웹 대시보드 개발.
+Plotly/Matplotlib: 실시간 데이터 시각화.
+알림 시스템:
+
+SMTP: 이메일 알림 전송.
+Slack API: Slack 채널에 경고 메시지 전달.
+
+---------------------------------------------------------------
+
+# tshark cmd
+-i <>
+-D
+-f <BPF 필터> : 네트워크 계층(TCP/IP 레벨)에서만 작동
+
+-r <file>
+-w <file>
+-Y <filter> : 디스플레이 필터
+-R <filter(old)> : 디스플레이 필터(구버전)
+
+-T <출력 형식>
+    - text
+    - fields
+    - json
+    - pdml
+
+-e <fields> : 특정 필드만 출력
+-V : 패킷 세부정보 출력
+-z <통계> : 통계 정보 출력
+    - io,stat : I/O 통계
+    - http,stat : HTTP 통계
+
+-c <패킷 수> : 캡처할 패킷 수 제한
+
+
+# 1. -f (캡처 필터)
+# 캡처 필터는 패킷이 캡처되는 시점에 조건에 맞는 데이터만 가져옵니다.
+
+# 2. -Y (디스플레이 필터)
+# 디스플레이 필터는 캡처한 데이터를 화면에 출력하기 전에 조건을 적용합니다.
+# Wireshark 필터 문법을 사용하며, 애플리케이션 계층(HTTP, DNS 등)의 필드를 세부적으로 필터링할 수 있습니다.
+
+
+[ex]
+1. GET Method만 캡쳐
+
+cmd : tshark -i eth0 -f "tcp port 80" -Y "http.request.method == "GET"
+-> BPF 필터(-f)는 HTTP 프로토콜을 직접 필터링할 수 없음
+-> 따라서 `tcp port 80` 처럼 포트 기반으로 필터링 해야 함
+-> 디스플레이 필터(-Y)는 HTTP 요청의 메서드를 `GET`으로 필터링할 수는 있지만, 올바른 필터 표현식을 사용해야 함
+
+---------------------------------------------------------------
+
+# Wireshark Data
+1. Frame (물리)
+- Timestamp (캡처 시간)
+- Packet Length (패킷 길이)
+- Capture Length (캡처된 데이터 길이)
+- Interface Info
+- Frame check sequence (FCS)
+
+2. Ethernet (데이터)
+- Source MAC address
+- Destination MAC address
+- EtherType
+- VLAN Tag
+
+3. Internet Protocol version (네트워크)
+- IP Version
+- Header Length
+- Total Length
+- Identification
+- Time To Live
+- Protocol
+- Source IP Address
+- Destination IP Address
+- IP Fragmentation
+
+4. Transmission Control Protocol (전송)
+- Source Port
+- Destination Port
+- Sequence Number
+- Acknowledgment Number (ACK)
+- TCP Flag
+    - SYN : 연결 설정
+    - ACK : 데이터 수신
+    - FIN : 연결 종료
+    - RST : 연결 재설정
+    - PSH : 버퍼 데이터 
+    - URG : 긴급 데이터
+- Window Size
+- Checksum
+- TCP Option
+
+5. HyperText Transfer Protocol (HTTP)
+- Requests Info
+    - HTTP Method
+    - URI
+    - HTTP Version
+    - Header Info
+- Response
+    - Http Status
+    - Header Info 
+
+*. Line-based text data (라인 기반 텍스트 데이터)
+
+
+--------------------------------------------------------------
