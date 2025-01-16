@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
 from collections import Counter
+from datetime import datetime
+import time
 import subprocess
 import json
 
 pcap_file = "C:\\test.pcapng"
+# pcap_file = "C:\\test2.pcapng"
 # pcap_file = "C:\\apache.pcap"
 
 def tshark_subporcess(thsark_cmd):
@@ -11,10 +14,12 @@ def tshark_subporcess(thsark_cmd):
     pcap_json = json.loads(pcap_json.stdout)
     return pcap_json
 
+
 def tshark_json(pcap_data):
     extracted_data = []
     protocol_list = {
         "1": "icmp",    # ICMP (Internet Control Message Protocol)	네트워크 오류 보고 및 진단.        
+        "2": "igmp",    # IGMP 인터넷 그룹 관리 프로토콜
         "6": "tcp",     # TCP (Transmission Control Protocol)	연결 지향적 전송 계층 프로토콜.    
         "17": "udp",    # UDP (User Datagram Protocol)	연결 비지향적 전송 계층 프로토콜.        
         "41": "ipv6",   # IPv6 encapsulation	IPv6 패킷의 캡슐화를 나타냅니다.        
@@ -27,6 +32,7 @@ def tshark_json(pcap_data):
     }    
     
     for index, packet in enumerate(pcap_data):
+        # IP
         layers = packet.get("_source", {}).get("layers", {})
         ip_src = layers.get("ip", {}).get("ip.src", "N/A")
         ip_dst = layers.get("ip", {}).get("ip.dst", "N/A")
@@ -35,27 +41,66 @@ def tshark_json(pcap_data):
         ip_src_port = layers.get(f"{ip_proto}", {}).get(f"{ip_proto}.srcport", "N/A")
         ip_dst_port = layers.get(f"{ip_proto}", {}).get(f"{ip_proto}.dstport", "N/A")
 
+        # FRAME
+        time_epoch = layers.get("frame", {}).get("frame.time_epoch", "N/A")
+        frame_len = layers.get("frame", {}).get("frame.len", "N/A")
+
         packet_info = {
             "ip_proto": ip_proto,
             "ip_src": ip_src,
             "ip_srcport": ip_src_port,
             "ip_dst": ip_dst,
-            "ip_dstport": ip_dst_port
+            "ip_dstport": ip_dst_port,
+
+            "time_epoch": time_epoch,
+            "frame_len": frame_len
         }
         
         extracted_data.append(packet_info)
         
     return extracted_data
 
+
 def tshark_counts(pcap_json):
-    protocol_counts = Counter([packet["ip_proto"] for packet in pcap_json])
-    # print(protocol_counts)
-    # Counter({'tcp': 120, 'udp': 75, 'icmp': 10, 'unknown': 5})
+    # total packet 
+    total_counts = len(pcap_json)
     
+    # ip counts
+    src_counts = Counter([packet["ip_src"] for packet in pcap_json])
+    dst_counts = Counter([packet["ip_dst"] for packet in pcap_json])
+    protocol_counts = Counter([packet["ip_proto"] for packet in pcap_json])
+    # Counter({'tcp': 120, 'udp': 75, 'icmp': 10, 'unknown': 5})
+
+    # averages packet size
+    packet_sizes = [int(packet["frame_len"]) for packet in pcap_json]
+    average_packet_size = sum(packet_sizes) / len(packet_sizes)
+
+    # packet times, average_pps
+    timestamps = [int(float(packet["time_epoch"])) for packet in pcap_json]
+    packet_counts = Counter(timestamps)
+    total_packets = sum(packet_counts.values())
+    total_seconds = len(packet_counts)
+    average_pps = round(total_packets / total_seconds, 2)
+    # averag_bps (BPS = PPS * average_packet * 8)
+    average_bps = round(average_pps * average_packet_size * 8, 2)
+
+    print(f"Total packet : {total_packets}")
+    print(f"Average pps : {average_pps}")
+    print(f"Average bps : {average_bps}")
+
     return protocol_counts
 
-def tshark_chart(pcap_json):
-    protocols = 
+
+def tshark_chart(protocol_counts):
+    protocols = list(protocol_counts.keys())
+    counts = list(protocol_counts.values())
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(protocols, counts)
+    plt.xlabel('Protocol')
+    plt.ylabel('packet Count')
+    plt.title('Protocol Distribution')
+    plt.show()
     
     return
     
@@ -68,7 +113,7 @@ def main():
     pcap_data = tshark_subporcess(thsark_cmd)
     pcap_json = tshark_json(pcap_data)
     pcap_counts = tshark_counts(pcap_json)
-    pcap_graph = None
+    # pcap_chart = tshark_chart(pcap_counts)
 
 if __name__ == "__main__":
     main()

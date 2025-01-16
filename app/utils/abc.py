@@ -1,15 +1,16 @@
-protocol_list = {
-    "1": "ICMP",    # ICMP (Internet Control Message Protocol)	네트워크 오류 보고 및 진단.        
-    "6": "TCP",     # TCP (Transmission Control Protocol)	연결 지향적 전송 계층 프로토콜.    
-    "17": "UDP",    # UDP (User Datagram Protocol)	연결 비지향적 전송 계층 프로토콜.        
-    "41": "IPv6",   # IPv6 encapsulation	IPv6 패킷의 캡슐화를 나타냅니다.        
-    "47": "GRE",    # GRE (Generic Routing Encapsulation)	터널링 프로토콜로, 여러 프로토콜을 캡슐화.        
-    "50": "ESP",    # ESP (Encapsulating Security Payload)	IPsec에서 사용되는 데이터 암호화 프로토콜.        
-    "51": "AH",     # AH (Authentication Header)	IPsec에서 사용되는 인증 헤더.   
-    "89": "OSPF",   # OSPF (Open Shortest Path First)	라우팅 프로토콜.        
-    "132": "SCTP"   # SCTP (Stream Control Transmission Protocol)	메시지 기반의 신뢰성 있는 전송 프로토콜.        
-} 
+import matplotlib.pyplot as plt
 
-proto = "6"
+# 데이터
+categories = ['A', 'B', 'C', 'D']
+values = [10, 15, 7, 12]
 
-print(protocol_list[proto])
+# 그래프 생성
+plt.figure(figsize=(8, 6))  # 그래프 크기 설정
+plt.bar(categories, values, color='skyblue')
+plt.title('Bar Chart Example', fontsize=16)
+plt.xlabel('Categories', fontsize=12)
+plt.ylabel('Values', fontsize=12)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+# 그래프 표시
+plt.show()
