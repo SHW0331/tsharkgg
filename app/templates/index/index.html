@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}CVEgg{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>tshark.gg</h2>
+    <form action="/report" method="post" enctype="multipart/form-data">
+        <label for="file-upload" class="file-label">
+            File (.pcap, .pcapng)
+            <input type="file" id="file-upload" name="file" style="display: none;">
+        </label>
+        <button type="submit" class="upload-btn">Upload</button>
+    </form>
+</div>
+
+<style>
+    /* File Label Styles */
+    .file-label {
+        display: inline-block;
+        background-color: #4e88e2; /* Blue accent color */
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .file-label:hover {
+        background-color: #3a6fb3; /* Slightly darker blue */
+    }
+
+    /* Upload Button Styles */
+    .upload-btn {
+        background-color: #1c1c1c; /* Slightly lighter dark for button */
+        color: #e0e0e0; /* Light text color */
+        padding: 10px 20px;
+        border: 1px solid #4e88e2; /* Blue border */
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-left: 10px; /* Space between buttons */
+    }
+
+    .upload-btn:hover {
+        background-color: #4e88e2; /* Blue background on hover */
+        color: #fff; /* White text on hover */
+    }
+</style>
+
+{% endblock %}

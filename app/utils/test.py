@@ -5,8 +5,8 @@ import time
 import subprocess
 import json
 
-pcap_file = "C:\\test.pcapng"
-# pcap_file = "C:\\test2.pcapng"
+# pcap_file = "C:\\test.pcapng"
+pcap_file = "C:\\test2.pcapng"
 # pcap_file = "C:\\apache.pcap"
 
 def tshark_subporcess(thsark_cmd):
@@ -78,15 +78,34 @@ def tshark_counts(pcap_json):
     # packet times, average_pps
     timestamps = [int(float(packet["time_epoch"])) for packet in pcap_json]
     packet_counts = Counter(timestamps)
+    # Counter({1737039567: 782, 1737039568: 433, ...})
+
     total_packets = sum(packet_counts.values())
     total_seconds = len(packet_counts)
     average_pps = round(total_packets / total_seconds, 2)
-    # averag_bps (BPS = PPS * average_packet * 8)
-    average_bps = round(average_pps * average_packet_size * 8, 2)
+    average_bps = round(average_pps * average_packet_size * 8, 2) # averag_bps (BPS = PPS * average_packet * 8)
 
-    print(f"Total packet : {total_packets}")
-    print(f"Average pps : {average_pps}")
-    print(f"Average bps : {average_bps}")
+    # 평균 pps 보다 큰 패킷들
+    abnormal_times = [time for time, count in packet_counts.items() if count > average_pps]
+    abnormal_packets = [packet for packet in pcap_json if int(float(packet["time_epoch"])) in abnormal_times]
+    abnormal_ip = Counter([packet["ip_src"] for packet in abnormal_packets])
+
+    x_times = list(packet_counts.keys())
+    y_packet = list(packet_counts.values())
+    plt.bar(x_times, y_packet, color=['red' if time in abnormal_times else 'blue' for time in x_times], label="Packet Count")
+    # Plot average PPS line
+    plt.axhline(y=average_pps, color='green', linestyle='--', label=f"Average PPS ({average_pps})")
+
+    # Labels and legend
+    plt.xlabel("Time (seconds)")
+    plt.ylabel("Packet Count")
+    plt.title("Packet Counts Over Time with Abnormal Times Highlighted")
+    plt.legend()
+
+    # Show plot
+    plt.tight_layout()
+    plt.show()
+
 
     return protocol_counts
 
