@@ -34,7 +34,10 @@ def report():
 
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)  # 파일 저장
-        flash(f'File successfully uploaded to {filepath}', 'success')
+        
+
+        
+
         return render_template('report.html')  # 업로드 후 다시 렌더링
 
     flash('Invalid file type. Only .pcap or .pcapng files are allowed.', 'error')
