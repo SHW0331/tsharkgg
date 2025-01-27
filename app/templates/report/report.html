@@ -1,11 +1,197 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %}CVEgg{% endblock %}
+{% block title %}TSHARKgg Dashboard{% endblock %}
 
 {% block content %}
+<div class="container">
+    <h1>TSHARKgg Dashboard</h1>
 
-<h2>
-    report
-</h2>
+    <!-- Dashboard Sections -->
+    <div class="dashboard">
+        <!-- Top IP List Section -->
+        <div class="card">
+            <h2>Top IPs</h2>
+            <p>Source IPs and Destination IPs</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>Packets</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>192.168.1.1</td>
+                        <td>100</td>
+                        <td>Source</td>
+                    </tr>
+                    <tr>
+                        <td>192.168.1.2</td>
+                        <td>80</td>
+                        <td>Destination</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
+        
+        <!-- Additional Section 1: Port Analysis -->
+        <div class="card">
+            <h2>Top Ports</h2>
+            <p>Top Source and Destination Ports</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Port</th>
+                        <th>Packets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>80</td>
+                        <td>120</td>
+                    </tr>
+                    <tr>
+                        <td>443</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Protocol Types Section -->
+        <div class="card">
+            <h2>Protocol Types</h2>
+            <p>Count of each protocol</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Protocol</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TCP</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td>UDP</td>
+                        <td>150</td>
+                    </tr>
+                    <tr>
+                        <td>ICMP</td>
+                        <td>50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Packet Count Section -->
+        <div class="card">
+            <h2>Packet Count</h2>
+            <p>Total Packets: 500</p>
+        </div>
+
+        <!-- PPS Graph Section -->
+        <div class="card">
+            <h2>Average PPS</h2>
+            <p>Graph here</p>
+        </div>
+
+
+        <!-- Additional Section 2: Traffic Volume by IP -->
+        <div class="card">
+            <h2>Traffic Volume by IP</h2>
+            <p>Top bandwidth usage</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>Data Transferred</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>192.168.1.1</td>
+                        <td>1GB</td>
+                    </tr>
+                    <tr>
+                        <td>192.168.1.2</td>
+                        <td>800MB</td>
+                    </tr>
+                    <tr>
+                        <td>...</td>
+                        <td>...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .dashboard {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .card {
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+
+    .card h2 {
+        margin-bottom: 10px;
+        color: #007bff;
+    }
+
+    .card p {
+        margin-bottom: 15px;
+        color: #e0e0e0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #e0e0e0;
+        margin-top: 10px;
+    }
+
+    th, td {
+        padding: 8px 12px;
+        border: 1px solid #333333;
+        text-align: center;
+    }
+
+    th {
+        background-color: #2a2a2a;
+        color: #ffffff;
+    }
+</style>
 {% endblock %}

@@ -6,13 +6,13 @@ import os
 report_bp = Blueprint('report', __name__, template_folder='../templates/report')
 
 # upload dir 설정
-UPLOAD_FOLDER = './app/upload'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, '../upload/')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 ALLOWED_EXTENSIONS = {'pcap', 'pcapng'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 # route 정의
 @report_bp.route('/report', methods=['POST'])
@@ -35,9 +35,6 @@ def report():
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)  # 파일 저장
         
-
-        
-
         return render_template('report.html')  # 업로드 후 다시 렌더링
 
     flash('Invalid file type. Only .pcap or .pcapng files are allowed.', 'error')

@@ -6,7 +6,7 @@ import subprocess
 import json
 
 # pcap_file = "C:\\test.pcapng"
-pcap_file = "C:\\test2.pcapng"
+pcap_file = "C:\\test.pcapng"
 # pcap_file = "C:\\apache.pcap"
 
 def tshark_subporcess(thsark_cmd):
@@ -132,7 +132,7 @@ def main():
     pcap_data = tshark_subporcess(thsark_cmd)
     pcap_json = tshark_json(pcap_data)
     pcap_counts = tshark_counts(pcap_json)
-    # pcap_chart = tshark_chart(pcap_counts)
+    pcap_chart = tshark_chart(pcap_counts)
 
 if __name__ == "__main__":
     main()
