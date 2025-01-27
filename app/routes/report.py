@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from app.utils.analysis import *
 from datetime import datetime
 import os
 
@@ -34,8 +35,13 @@ def report():
 
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)  # 파일 저장
+
+        # 패킷 분석
+        pcap_data = tshark_subporcess(filepath)
+        pcap_json = tshark_json(pcap_data)
+        pcap_counts = tshark_counts(pcap_json)
         
-        return render_template('report.html')  # 업로드 후 다시 렌더링
+        return render_template('report.html', data=pcap_counts)  # 업로드 후 다시 렌더링
 
     flash('Invalid file type. Only .pcap or .pcapng files are allowed.', 'error')
     return render_template('error.html')  # 업로드 후 다시 렌더링

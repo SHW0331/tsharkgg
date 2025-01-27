@@ -6,10 +6,16 @@ import subprocess
 import json
 
 # pcap_file = "C:\\test.pcapng"
-pcap_file = "C:\\test.pcapng"
+# pcap_file = "C:\\test.pcapng"
 # pcap_file = "C:\\apache.pcap"
+pcap_file = None
 
-def tshark_subporcess(thsark_cmd):
+def tshark_subporcess(pcap_file):
+    thsark_cmd = [
+        "tshark",
+        "-r", pcap_file,
+        "-T", "json"
+    ]
     pcap_json = subprocess.run(thsark_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     pcap_json = json.loads(pcap_json.stdout)
     return pcap_json
@@ -90,22 +96,21 @@ def tshark_counts(pcap_json):
     abnormal_packets = [packet for packet in pcap_json if int(float(packet["time_epoch"])) in abnormal_times]
     abnormal_ip = Counter([packet["ip_src"] for packet in abnormal_packets])
 
-    x_times = list(packet_counts.keys())
-    y_packet = list(packet_counts.values())
-    plt.bar(x_times, y_packet, color=['red' if time in abnormal_times else 'blue' for time in x_times], label="Packet Count")
-    # Plot average PPS line
-    plt.axhline(y=average_pps, color='green', linestyle='--', label=f"Average PPS ({average_pps})")
+    # x_times = list(packet_counts.keys())
+    # y_packet = list(packet_counts.values())
+    # plt.bar(x_times, y_packet, color=['red' if time in abnormal_times else 'blue' for time in x_times], label="Packet Count")
+    # # Plot average PPS line
+    # plt.axhline(y=average_pps, color='green', linestyle='--', label=f"Average PPS ({average_pps})")
 
-    # Labels and legend
-    plt.xlabel("Time (seconds)")
-    plt.ylabel("Packet Count")
-    plt.title("Packet Counts Over Time with Abnormal Times Highlighted")
-    plt.legend()
+    # # Labels and legend
+    # plt.xlabel("Time (seconds)")
+    # plt.ylabel("Packet Count")
+    # plt.title("Packet Counts Over Time with Abnormal Times Highlighted")
+    # plt.legend()
 
-    # Show plot
-    plt.tight_layout()
-    plt.show()
-
+    # # Show plot
+    # plt.tight_layout()
+    # plt.show()
 
     return protocol_counts
 
@@ -124,15 +129,10 @@ def tshark_chart(protocol_counts):
     return
     
 def main():
-    thsark_cmd = [
-        "tshark",
-        "-r", pcap_file,
-        "-T", "json"
-    ]
-    pcap_data = tshark_subporcess(thsark_cmd)
+    pcap_data = tshark_subporcess(pcap_file)
     pcap_json = tshark_json(pcap_data)
     pcap_counts = tshark_counts(pcap_json)
-    pcap_chart = tshark_chart(pcap_counts)
+    # pcap_chart = tshark_chart(pcap_counts)
 
 if __name__ == "__main__":
     main()
